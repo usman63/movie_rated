@@ -46,4 +46,4 @@ group :development do
 end
 # additional gems
 gem 'devise'
-
+gem "paperclip"

@@ -3,6 +3,25 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+  <div>
+    <%= image_tag show_image(current_user.image) %>
+  </div>
+  <%if resource.image %>
+    <div class="field">
+      <%= f.label :Image %>
+      <%= f.fields_for :image, resource.image  do|image_form| %>
+        <%= image_form.file_field :image %>
+      <% end %>
+    </div>
+  <%else%>
+    <div class="field">
+      <%= f.label :Image %>
+      <%= f.fields_for :image, Image.new do|image_form| %>
+        <%= image_form.file_field :image %>
+      <% end %>
+    </div>
+  <%end%>
+
   <div class="field">
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name, autofocus: true %>
