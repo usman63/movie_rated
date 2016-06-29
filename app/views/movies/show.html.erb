@@ -28,7 +28,7 @@
 <p>
   <strong>Trailer:</strong>
   <%if @movie.embeded_url %>
-    <%= raw( @movie.embeded_url) %>
+    <%= raw(youtube_embed @movie.embeded_url) %>
   <%else%>
     <em>No trailer for this Movie</em>
   <%end%>
