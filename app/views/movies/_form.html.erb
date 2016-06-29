@@ -1,16 +1,23 @@
-<%= form_for(@movie) do |f| %>
+<%= nested_form_for(@movie) do |f| %>
   <% if @movie.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-
       <ul>
-      <% @movie.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
+  <div>
+    <%= f.fields_for :images do |image| %>
+      <%= image.file_field :image %>
+      <%= image_tag image.object.image.url(:medium) %>
+      <%= image.link_to_remove "Remove Poster" %>
+    <% end %>
 
+    <%= f.link_to_add "Add Poster", :images %>
+  </div>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -21,7 +28,7 @@
   </div>
   <div class="field">
     <%= f.label :is_featured %><br>
-    <%= f.check_box :is_featured %>
+      <%= f.check_box :is_featured %>
   </div>
   <div class="field">
     <%= f.label :description %><br>

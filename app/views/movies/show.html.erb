@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <% @movie.images.each do |image| %>
+    <%= image_tag image.image.url(:medium) %>
+  <% end %>
+</p>
+<p>
   <strong>Name:</strong>
   <%= @movie.name %>
 </p>

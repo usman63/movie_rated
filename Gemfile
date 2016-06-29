@@ -48,3 +48,4 @@ end
 gem 'devise'
 gem "paperclip"
 gem 'ckeditor'
+gem 'nested_form'

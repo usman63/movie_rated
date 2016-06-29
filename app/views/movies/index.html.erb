@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Poster</th>
       <th>Name</th>
       <th>Date of release</th>
       <th>Is featured</th>
@@ -18,12 +19,13 @@
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
+        <td><%= image_tag movie.images.first.image.url(:medium) if movie.images.present? %></td>
         <td><%= movie.name %></td>
         <td><%= movie.released_date %></td>
         <td><%= movie.is_featured %></td>
-        <td><%= movie.description %></td>
+        <td><%= raw(movie.description) %></td>
         <td><%= movie.duration %></td>
-        <td><%= movie.embeded_url %></td>
+        <!-- <td><%= movie.embeded_url %></td> -->
         <td><%= link_to 'Show', movie %></td>
         <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
         <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
