@@ -47,3 +47,4 @@ end
 # additional gems
 gem 'devise'
 gem "paperclip"
+gem 'ckeditor'
