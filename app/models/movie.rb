@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  GENRE = ["Horror", "Thriller", "Action", "Comedy"]
 
   has_many :images, as: :imageable
 
@@ -7,4 +8,5 @@ class Movie < ActiveRecord::Base
   validates :name,          presence: true, length: { maximum: 60 }
   validates :released_date, presence: true
   validates :duration,                      length: { maximum: 20 }
+  validates :genre,                         length: { maximum: 30 }
 end

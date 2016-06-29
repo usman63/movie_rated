@@ -26,6 +26,11 @@
 </p>
 
 <p>
+  <strong>Genre:</strong>
+  <%= @movie.genre %>
+</p>
+
+<p>
   <strong>Trailer:</strong>
   <%if @movie.embeded_url %>
     <%= raw(youtube_embed @movie.embeded_url) %>

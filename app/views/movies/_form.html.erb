@@ -27,6 +27,10 @@
     <%= f.date_select :released_date %>
   </div>
   <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.select :genre, options_for_select(collection_for_movie_genre), include_blank: 'Please Select Genre' %>
+  </div>
+  <div class="field">
     <%= f.label :description %><br>
     <%= f.cktext_area :description %>
   </div>
