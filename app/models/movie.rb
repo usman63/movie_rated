@@ -2,6 +2,8 @@ class Movie < ActiveRecord::Base
   GENRE = ["Horror", "Thriller", "Action", "Comedy"]
 
   has_many :images, as: :imageable
+  has_many :movie_casts
+  has_many :actors, through: :movie_casts
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
@@ -10,3 +12,4 @@ class Movie < ActiveRecord::Base
   validates :duration,                      length: { maximum: 20 }
   validates :genre,                         length: { maximum: 30 }
 end
+  

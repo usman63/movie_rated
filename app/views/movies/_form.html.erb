@@ -12,7 +12,7 @@
   <div>
     <%= f.fields_for :images do |image| %>
       <%= image.file_field :image %>
-      <%= image_tag image.object.image.url(:medium) %>
+      <%= image_tag render_image image ,:medium %>
       <%= image.link_to_remove "Remove Poster" %>
     <% end %>
 
@@ -41,6 +41,10 @@
   <div class="field">
     <%= f.label :embeded_url %><br>
     <%= f.text_field :embeded_url %>
+  </div>
+  <div class="field">
+    <%= f.label :Actors %><br>
+    <%= f.select :actor_ids, options_from_collection_for_select(@all_actors, 'id', 'name', @movie_actors), {}, { multiple: true } %>
   </div>
   <div class="actions">
     <%= f.submit %>

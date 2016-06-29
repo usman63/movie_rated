@@ -1,11 +1,14 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :get_all_actors
+  before_action :authenticate_user!, except: [:show, :index]
 
   def index
     @movies = Movie.all
   end
 
   def show
+    @movie_actors = @movie.actors.collect(&:name).join(', ')
   end
 
   def new
@@ -13,6 +16,7 @@ class MoviesController < ApplicationController
   end
 
   def edit
+    @movie_actors = @movie.actors.pluck(:id)
   end
 
   def create
@@ -49,6 +53,10 @@ class MoviesController < ApplicationController
     end
   end
 
+  def get_all_actors
+    @all_actors = Actor.all
+  end
+
   private
 
     def set_movie
@@ -56,7 +64,7 @@ class MoviesController < ApplicationController
     end
 
     def movie_params
-      params.require(:movie).permit(:name, :released_date, :description, :duration, :embeded_url, images_attributes: [:id, :image, :_destroy], :genre)
+      params.require(:movie).permit(:name, :released_date, :description, :duration, :embeded_url, {images_attributes: [:id, :image, :_destroy]}, :genre, {actor_ids: []})
     end
 
 end
