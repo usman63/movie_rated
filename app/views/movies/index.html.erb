@@ -8,7 +8,6 @@
       <th>Poster</th>
       <th>Name</th>
       <th>Date of release</th>
-      <th>Is featured</th>
       <th>Description</th>
       <th>Duration</th>
       <th>Trailer</th>
@@ -22,7 +21,6 @@
         <td><%= image_tag movie.images.first.image.url(:medium) if movie.images.present? %></td>
         <td><%= movie.name %></td>
         <td><%= movie.released_date %></td>
-        <td><%= movie.is_featured %></td>
         <td><%= raw(movie.description) %></td>
         <td><%= movie.duration %></td>
         <!-- <td><%= movie.embeded_url %></td> -->
