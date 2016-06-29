@@ -27,7 +27,11 @@
 
 <p>
   <strong>Trailer:</strong>
-  <%= @movie.embeded_url %>
+  <%if @movie.embeded_url %>
+    <%= raw( @movie.embeded_url) %>
+  <%else%>
+    <em>No trailer for this Movie</em>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
