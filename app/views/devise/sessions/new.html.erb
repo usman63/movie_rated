@@ -1,26 +1,61 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class='row padding-top'>
+  <div class='col col-sm-2 col-md-2 col-lg-2 padding-top center'>
+    <%= image_tag 'icon.png', class: 'img-thumbnail' %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+</div>
+<div id='login_form_style' class='row'>
+  <div class='col col-sm-12 col-md-6 col-lg-5 center'>
+    <hr>
+    <div>
+      <div class='panel'>
+        <div class='panel-body'>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class='row form-group padding-top'>
+              <div class='col col-sm-3 col-md-3 col-lg-3'>
+                <%= f.label :email, class: 'label-font' %>
+              </div>
+              <div class=' col col-sm-9 col-md-9 col-lg-9'>
+                <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+              </div>
+            </div>
+            <div class='row form-group padding-top'>
+              <div class='col col-sm-3 col-md-3 col-lg-3'>
+                <%= f.label :password, class: 'label-font' %>
+              </div>
+              <div class='col col-sm-9 col-md-9 col-lg-9'>
+                <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
+              </div>
+            </div>
+            <div class='row form-group'>
+              <div class='col col-sm-3 col-md-3 col-lg-3'>
+              </div>
+              <div class='col col-sm-9 col-md-9 col-lg-9 border'>
+                <% if devise_mapping.rememberable? -%>
+                  <div class='form-group'>
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me, class: 'label-font' %>
+                  </div>
+                <% end -%>
+              </div>
+            </div>
+            <div class='actions'>
+              <div class='row'>
+                <div class='col col-sm-12 col-md-12 col-lg-6 vertical-padding-zero'>
+                  <%= f.submit 'Log in', class: 'btn btn-success btn-block btn-lg radius-none' %>
+                </div>
+                <div class='col col-sm-12 col-md-12 col-lg-6 vertical-padding-zero'>
+                  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+                    <%= link_to 'Create  a new Account', new_registration_path(resource_name), { class:'btn btn-primary btn-block btn-lg white-text radius-none' } %>
+                  <% end -%>
+                  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                    <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'allign-left' %><br />
+                  <% end -%>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

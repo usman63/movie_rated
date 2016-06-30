@@ -1,46 +1,52 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true } ) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :Image %>
-    <%= f.fields_for :image, Image.new do |image_form| %>
-      <%= image_form.file_field :image %>
-    <% end %>
+<div class='row padding-top'>
+  <div class='col col-sm-2 col-md-2 col-lg-2 padding-top center'>
+    <%= image_tag 'icon.png', class: 'img-thumbnail' %>
   </div>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+</div>
+<div class='row'>
+  <div class='col col-sm-3 col-md-3 col-lg-5 center'>
+    <hr>
+    <div>
+      <div class='panel'>
+        <div class='panel-body'>
+          <%= form_for( resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true } ) do |f| %>
+            <%= devise_error_messages! %>
+            <div class='field'>
+              <%= f.label :Image %>
+              <%= f.fields_for :image, Image.new do |image_form| %>
+                <%= image_form.file_field :image, class: 'form-control' %>
+              <% end %>
+            </div>
+            <div class='field'>
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+            </div>
+            <div class='field'>
+              <%= f.label :last_name %>
+              <%= f.text_field :last_name, class: 'form-control' %>
+            </div>
+            <div class='field'>
+              <%= f.label :email %>
+              <%= f.email_field :email, class: 'form-control' %>
+            </div>
+            <div class='field'>
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+              <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
+            </div>
+            <div class='field'>
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control' %>
+            </div>
+            <div class='actions'>
+              <%= f.submit 'Sign up', { class:'btn btn-primary btn-block btn-lg white-text radius-none' } %>
+            </div>
+            <%= render 'devise/shared/links' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
