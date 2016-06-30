@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require ckeditor/init
 //= require jquery_nested_form
+//= require bootstrap-sprockets
+//= require shared.js
+//= require_tree .
