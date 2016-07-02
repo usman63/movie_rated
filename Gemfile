@@ -50,3 +50,4 @@ gem "paperclip"
 gem 'ckeditor'
 gem 'nested_form'
 gem 'bootstrap-sass'
+gem 'kaminari'
