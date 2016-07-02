@@ -25,6 +25,10 @@
           <%= f.date_select :released_date, class: 'form-control' %>
         </div>
         <div class='field'>
+          <%= f.label :featured %><br>
+          <%= f.check_box :featured %>
+        </div>
+        <div class='field'>
           <%= f.label :genre %><br>
           <%= f.select :genre, options_for_select(collection_for_movie_genre), include_blank: 'Please Select Genre', class: 'form-control' %>
         </div>

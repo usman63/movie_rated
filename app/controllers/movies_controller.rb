@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
 
   def index
-    @movies = Movie.all.page(params[:page])
+    @movies = Movie.get_movies(params).page(params[:page])
   end
 
   def show
@@ -64,7 +64,7 @@ class MoviesController < ApplicationController
     end
 
     def movie_params
-      params.require(:movie).permit(:name, :released_date, :description, :duration, :embeded_url, {images_attributes: [:id, :image, :_destroy]}, :genre, {actor_ids: []})
+      params.require(:movie).permit(:name, :released_date, :description, :duration, :embeded_url, {images_attributes: [:id, :image, :_destroy]}, :genre, {actor_ids: []}, :featured)
     end
 
 end
