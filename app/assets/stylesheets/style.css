@@ -110,7 +110,7 @@
   margin: auto;
 }
 body {
-  background-image: url(/assets/bg7.jpg);
+  background-image: url(/assets/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -131,4 +131,22 @@ body {
 }
 .margin-top-20 {
   margin-top: 20px;
+}
+.home-page-division {
+  min-height: 180px;
+}
+.home-sep-logo {
+  background-color: black;
+  min-height: inherit;
+}
+.home-icon {
+  height: 90px;
+}
+.home-posters {
+  max-height: 300px;
+  max-width: 230px;
+  border: 3px solid white;
+}
+.margin-left-40 {
+  margin-left: 40px;
 }

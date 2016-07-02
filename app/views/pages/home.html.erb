@@ -1,15 +1,12 @@
-<div class="row font-white">
-  <div class="col col-sm-2 col-md-2 col-lg-2 col-lg-offset-4 padding-top">
+<div class='row font-white'>
+  <div class='col col-sm-2 col-md-2 col-lg-2 col-lg-offset-4 padding-top'>
     <%= image_tag 'icon.png', class: 'img-thumbnail icon-pic' %>
   </div>
-  <div class="col col-sm-4 col-md-7 col-lg-7 col-lg-offset-3">
-    <h1 class="home-h1">Movie <em>Rated</em> <h1>
-  </div>
 </div>
-<div class="row padding-top">
-  <div class="col col-sm-7 col-md-7 col-lg-7 center font-white padding-top">
+<div class='row'>
+  <div class='col col-sm-7 col-md-4 col-lg-4 center font-white'>
     <% if user_signed_in? %>
-      <h1>Welcome home</h1>
+      <h1>Welcome <%= current_user.first_name %></h1>
     <% else %>
       <div class='row'>
         <div class='col col-sm-12 col-md-12 col-lg-6'>
@@ -20,5 +17,25 @@
         </div>
       </div>
     <% end %>
+  </div>
+</div>
+<div class='padding-top'>
+  <%= image_tag 'featured.png', class: 'img-thumbnail icon-pic home-icon' %>
+</div>
+<%= link_to 'View More', movies_path(featured: true), class: 'font-white pull-right' %>
+<hr>
+<div class='row home-page-division'>
+  <div class='row'>
+    <%= render 'movies/movie_list', movies: @featured_movies %>
+  </div>
+</div>
+<div class='padding-top'>
+  <%= image_tag 'latest.png', class: 'img-thumbnail icon-pic home-icon' %>
+</div>
+<%= link_to 'View More', movies_path(latest: true), class: 'font-white pull-right' %>
+<hr>
+<div class='row home-page-division'>
+  <div class='row'>
+    <%= render 'movies/movie_list', movies: @latest_movies %>
   </div>
 </div>
