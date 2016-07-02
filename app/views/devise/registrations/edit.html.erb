@@ -1,11 +1,11 @@
 <%= render 'shared/leaving_site' %>
-<div class='row'>
-  <div class='col col-sm-12 col-md-8 col-lg-8 center'>
+<div class='row padding-top'>
+  <div class='col col-sm-12 col-md-8 col-lg-10 padding-top center'>
     <div class='panel'>
       <div class='panel-body'>
         <%= form_for( resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } ) do |f| %>
           <%= devise_error_messages! %>
-            <div class='col col-sm-12 col-md-6 col-lg-6'>
+            <div class='col col-sm-12 col-md-6 col-lg-4 col-lg-offset-1'>
               <div class='field'>
                 <%= f.label :first_name %>
                 <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>

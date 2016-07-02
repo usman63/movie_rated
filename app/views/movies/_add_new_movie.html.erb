@@ -1,0 +1,7 @@
+<div class='col col-sm-12 col-md-12 col-lg-4 col-lg-offset-1'>
+  <% if user_signed_in? %>
+    <%= link_to 'New Movie', new_movie_path, class: 'btn btn-success btn-lg btn-block' %>
+  <% else %>
+    <%= link_to 'Log in to Add a Movie', new_user_session_path, class: 'btn btn-success btn-lg btn-block' %>
+  <% end %>
+</div>

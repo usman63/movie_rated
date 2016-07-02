@@ -1,0 +1,28 @@
+<div class='modal fade' id='edit_poster' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+        <h4 class='modal-title' id='myModalLabel'>Posters</h4>
+      </div>
+      <div class='modal-body'>
+        <div class='row'>
+          <%= f.fields_for :images do |image| %>
+            <div class='col col-sm-6 col-md-6 col-lg6'>
+              <%= image.file_field :image %>
+              <%= image_tag render_image image ,:medium %>
+              <%= image.link_to_remove 'Remove Poster', class: 'btn bt-danger' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <%= f.link_to_add 'Add New Poster', :images, class: 'btn btn-primary' %>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-primary' data-dismiss='modal'>Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

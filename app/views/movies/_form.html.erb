@@ -1,52 +1,53 @@
-<%= nested_form_for(@movie) do |f| %>
-  <% if @movie.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-      <ul>
-        <% @movie.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div class='panel panel-default padding-top'>
+  <div class='panel-heading'>Edit Movie</div>
+    <div class='panel-body'>
+      <%= nested_form_for(@movie) do |f| %>
+        <% if @movie.errors.any? %>
+          <div id='error_explanation'>
+            <h2><%= pluralize(@movie.errors.count, 'error') %> prohibited this movie from being saved:</h2>
+            <ul>
+              <% @movie.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div>
-    <%= f.fields_for :images do |image| %>
-      <%= image.file_field :image %>
-      <%= image_tag render_image image ,:medium %>
-      <%= image.link_to_remove "Remove Poster" %>
-    <% end %>
-
-    <%= f.link_to_add "Add Poster", :images %>
+        <div>
+          <%= render 'edit_posters', f: f %>
+          <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#edit_poster'> Edit Poster</button>
+        </div>
+        <div class='field'>
+          <%= f.label :name %><br>
+          <%= f.text_field :name, required: true, class: 'form-control' %>
+        </div>
+        <div class='field'>
+          <%= f.label :released_date %><br>
+          <%= f.date_select :released_date, class: 'form-control' %>
+        </div>
+        <div class='field'>
+          <%= f.label :genre %><br>
+          <%= f.select :genre, options_for_select(collection_for_movie_genre), include_blank: 'Please Select Genre', class: 'form-control' %>
+        </div>
+        <div class='field'>
+          <%= f.label :description %><br>
+          <%= f.cktext_area :description, class: 'form-control' %>
+        </div>
+        <div class='field'>
+          <%= f.label :duration %><br>
+          <%= f.text_field :duration, class: 'form-control' %>
+        </div>
+        <div class='field'>
+          <%= f.label :embeded_url %><br>
+          <%= f.text_field :embeded_url, class: 'form-control' %>
+        </div>
+        <div class='field'>
+          <%= f.label :Actors %><br>
+          <%= f.select :actor_ids, options_from_collection_for_select(@all_actors, 'id', 'name', @movie_actors), {}, { multiple: true, class: 'form-control' } %>
+        </div>
+        <hr>
+        <div class='actions'>
+          <%= f.submit class:'btn btn-primary btn-block' %>
+        </div>
+      <% end %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :released_date %><br>
-    <%= f.date_select :released_date %>
-  </div>
-  <div class="field">
-    <%= f.label :genre %><br>
-    <%= f.select :genre, options_for_select(collection_for_movie_genre), include_blank: 'Please Select Genre' %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.cktext_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.text_field :duration %>
-  </div>
-  <div class="field">
-    <%= f.label :embeded_url %><br>
-    <%= f.text_field :embeded_url %>
-  </div>
-  <div class="field">
-    <%= f.label :Actors %><br>
-    <%= f.select :actor_ids, options_from_collection_for_select(@all_actors, 'id', 'name', @movie_actors), {}, { multiple: true } %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

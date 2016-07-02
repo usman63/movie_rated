@@ -1,3 +1,24 @@
-<h1>
-  Welcome Home
-</h1>
+<div class="row font-white">
+  <div class="col col-sm-2 col-md-2 col-lg-2 col-lg-offset-4 padding-top">
+    <%= image_tag 'icon.png', class: 'img-thumbnail icon-pic' %>
+  </div>
+  <div class="col col-sm-4 col-md-7 col-lg-7 col-lg-offset-3">
+    <h1 class="home-h1">Movie <em>Rated</em> <h1>
+  </div>
+</div>
+<div class="row padding-top">
+  <div class="col col-sm-7 col-md-7 col-lg-7 center font-white padding-top">
+    <% if user_signed_in? %>
+      <h1>Welcome home</h1>
+    <% else %>
+      <div class='row'>
+        <div class='col col-sm-12 col-md-12 col-lg-6'>
+          <%= link_to 'Log in', user_session_path, class:'btn btn-primary btn-lg btn-block white_text radius-none vertical-padding-zero' %>
+        </div>
+        <div class='col col-sm-12 col-md-12 col-lg-6'>
+          <%= link_to 'Create a new Account', new_user_registration_path, { class:'btn btn-success btn-block white_text radius-none btn-lg vertical-padding-zero' } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

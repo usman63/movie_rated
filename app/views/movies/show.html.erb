@@ -1,47 +1,59 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <% @movie.images.each do |image| %>
-    <%= image_tag image.image.url(:medium) %>
-  <% end %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%= @movie.name %>
-</p>
-
-<p>
-  <strong>Date of release:</strong>
-  <%= @movie.released_date %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= raw(@movie.description) %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @movie.duration %>
-</p>
-
-<p>
-  <strong>Genre:</strong>
-  <%= @movie.genre %>
-</p>
-
-<p>
-  <strong>Trailer:</strong>
-  <% if @movie.embeded_url %>
-    <%= raw(youtube_embed @movie.embeded_url) %>
-  <% else %>
-    <em>No trailer for this Movie</em>
-  <% end %>
-</p>
-
-<p>
-  <strong>Cast</strong>
-  <%= @movie_actors %>
-</p>
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= render 'movie_trailer', movie: @movie %>
+<div class='row'>
+  <div class='col col-sm-6 col-md-5 col-lg-4 col-lg-offset-2 padding-top'>
+    <%= image_tag show_image(@movie.images.first) %>
+  </div>
+  <div class='col col-sm-6 col-md-5 col-lg-4 font-white'>
+    <div class='row'>
+      <div>
+        <table class='font-size'>
+          <tr>
+            <th>Title</th>
+            <td><%= @movie.name %></td>
+          </tr>
+          <tr>
+            <th>Released Date</th>
+            <td><%= @movie.released_date %></td>
+          </tr>
+          <tr>
+            <th>Duration</th>
+            <td><%= @movie.duration %></td>
+          </tr>
+          <tr>
+            <th>Genre</th>
+            <td><%= @movie.genre %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class='row'>
+      <%= link_to 'Watch Trailer', '#', 'data-toggle' => 'modal', 'data-target' => '#movie_trailer', class: 'btn btn-success btn-block' %>
+    </div>
+    <div class='row padding-top'>
+      <%= link_to 'Edit Details', edit_movie_path(@movie), class: 'btn btn-primary btn-block' %>
+    </div>
+  </div>
+</div>
+<hr>
+<div class='row font-white'>
+  <div class='col col-sm-6 col-md-5 col-lg-4 col-lg-offset-2'>
+    <h1> Description</h1>
+    <p>
+      <%= raw(@movie.description) %>
+    </p>
+  </div>
+  <div class='col col-sm-6 col-md-5 col-lg-4'>
+    <div class='row'>
+      <%= render 'image_slider', movie: @movie %>
+    </div>
+    <div class='row'>
+      <div class='col col-sm-6 col-md-5 col-lg-4'>
+        <h3>Cast</h3>
+      </div>
+      <div class='col col-sm-6 col-md-5 col-lg-4'>
+        <h3><%= @movie_actors %></h3>
+      </div>
+    </div>
+  </div>
+</div>
 <%= link_to 'Back', movies_path %>

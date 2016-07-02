@@ -1,18 +1,22 @@
+<%= render 'add_new_movie' %>
 <p id='notice'><%= notice %></p>
-<ul class='photo-grid'>
-  <% @movies.each do |movie| %>
-    <li>
-      <%= link_to(movie) do %>
-        <figure>
-          <%= image_tag show_image(movie.images.first) if movie.images.present? %>
-          <figcaption>
-            <p>
-              <%= movie.name %>
-            </p>
-          </figcaption>
-        </figure>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
-<%= link_to 'New Movie', new_movie_path %>
+<div class='col col-sm-12 col-md-12 col-lg-12'>
+  <ul class='photo-grid'>
+    <% @movies.each do |movie| %>
+      <li>
+        <div class='box4'>
+          <h1><%= movie.name %></h1>
+          <%= link_to(movie) do %>
+            <figure>
+              <%= image_tag show_image(movie.images.first) if movie.images.present? %>
+              <figcaption>
+                <p><%= movie.name %></p>
+              </figcaption>
+            </figure>
+          <% end %>
+          <p><%= truncate(raw(movie.description), length: 80, escape: false) %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
