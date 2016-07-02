@@ -126,3 +126,9 @@ body {
 .home-h1 {
   font-size: 100px;
 }
+.modal-width {
+  width: 90%;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}

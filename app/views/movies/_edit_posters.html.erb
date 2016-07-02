@@ -1,5 +1,5 @@
 <div class='modal fade' id='edit_poster' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-  <div class='modal-dialog' role='document'>
+  <div class='modal-dialog modal-width' role='document'>
     <div class='modal-content'>
       <div class='modal-header'>
         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
@@ -10,7 +10,7 @@
       <div class='modal-body'>
         <div class='row'>
           <%= f.fields_for :images do |image| %>
-            <div class='col col-sm-6 col-md-6 col-lg6'>
+            <div class='col col-sm-6 col-md-6 col-lg-3 margin-top-20'>
               <%= image.file_field :image %>
               <%= image_tag render_image image ,:medium %>
               <%= image.link_to_remove 'Remove Poster', class: 'btn bt-danger' %>
