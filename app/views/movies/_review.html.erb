@@ -1,0 +1,15 @@
+<hr>
+<div class="row">
+  <div class="col">
+    <strong><%= review.user.first_name %></strong> -<em><%= review.user.email %></em>
+  </div>
+</div>
+<div class="row">
+  <%= review.review %>
+</div>
+<% if review.user == current_user %>
+  <div class="row">
+    <%= link_to 'Edit', edit_movie_review_path(@movie, review), class: 'btn btn-primary' %>
+    <%= link_to 'Destroy', [@movie, review], method: :delete,class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>

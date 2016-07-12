@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-  resources :movies
+  resources :movies do
+    resources :reviews, except: [:show, :index]
+  end
   devise_for :users
   get '/home' => 'pages#home'
   root 'pages#home'

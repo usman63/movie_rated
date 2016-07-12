@@ -7,14 +7,20 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <div class='black-background'>
+      <%= render 'layouts/header'%>
+      <%= render 'layouts/alert'%>
+      <div class='container'>
+        <%= yield %>
+      </div>
 
-    <%= render 'layouts/header'%>
+      <%= render 'layouts/footer'%>
 
-    <div class='container container black-background'>
-      <%= yield %>
     </div>
-
-    <%= render 'layouts/footer'%>
-
+    <script type="text/javascript">
+      $(function() {
+        <%= yield :js_init %>
+      });
+    </script>
   </body>
 </html>

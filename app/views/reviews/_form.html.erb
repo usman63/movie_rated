@@ -1,0 +1,23 @@
+<%= form_for([@movie, @review], remote: remote_form) do |f| %>
+  <% if @review.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(@review.errors.count, 'error') %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h1>Give Review</h1>
+  <div class='row'>
+    <div class='field col col-md-10 col-lg-10 col-sm-10'>
+      <%= f.text_area :review, class: 'form-control', placeholder: 'Write a review here.', required: 'true' %>
+    </div>
+    <div class='actions col col-md-2 col-lg-2 col-sm-2'>
+      <%= f.submit class: 'btn btn-primary btn-block btn-lg' %>
+    </div>
+  </div>
+<% end %>

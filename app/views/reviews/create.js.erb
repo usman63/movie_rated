@@ -1,0 +1,10 @@
+<% if @review.id %>
+  $('#reviews').prepend("<%= escape_javascript render(partial: 'movies/review', locals: {review: @review}) %>");
+  $('#review_review').val('');
+  show_alert('alert-success','Review Created');
+
+<% else %>
+  <% flash.each do|t| %>
+    show_alert('alert-danger',<%= raw (t.include?('&quot;') ? t.gsub('&quot;', '') : t) %>);
+  <% end %>
+<% end %>

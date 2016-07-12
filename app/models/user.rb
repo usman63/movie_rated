@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_one :image, as: :imageable, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :first_name, presence: true, length: {minimum: 5, maximum: 60}
   validates :last_name, presence: true, length: {minimum: 5, maximum: 60}

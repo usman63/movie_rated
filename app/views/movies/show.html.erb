@@ -26,7 +26,7 @@
         </table>
       </div>
     </div>
-    <div class='row'>
+    <div class='row '>
       <%= link_to 'Watch Trailer', '#', 'data-toggle' => 'modal', 'data-target' => '#movie_trailer', class: 'btn btn-success btn-block' %>
     </div>
     <div class='row padding-top'>
@@ -37,7 +37,7 @@
 <hr>
 <div class='row font-white'>
   <div class='col col-sm-6 col-md-5 col-lg-4 col-lg-offset-2'>
-    <h1> Description</h1>
+    <h1>Description</h1>
     <p>
       <%= raw(@movie.description) %>
     </p>
@@ -56,4 +56,25 @@
     </div>
   </div>
 </div>
+<div class='row font-white'>
+  <div class='col col-sm-6 col-md-5 col-lg-4 col-lg-offset-2'>
+    <h1>Review</h1>
+  </div>
+</div>
+<div class='row font-white'>
+  <%= render partial: 'reviews/form', locals: {remote_form: true} %>
+</div>
+<div class='row font-white'>
+  <div id='reviews'>
+    <% if @reviews.blank? %>
+      <h3>No review for this movie yet.</h3>
+    <% else %>
+      <%= render partial: 'review', collection: @reviews %>
+    <% end %>
+  </div>
+</div>
 <%= link_to 'Back', movies_path %>
+<% content_for :js_init do %>
+  CustomerInitialCapture.init();
+  AttachmentSection.init();
+<% end %>

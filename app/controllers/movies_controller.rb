@@ -9,6 +9,8 @@ class MoviesController < ApplicationController
 
   def show
     @movie_actors = @movie.actors.collect(&:name).join(', ')
+    @reviews = @movie.reviews.includes(:user).ordered
+    @review = @movie.reviews.build
   end
 
   def new
@@ -47,6 +49,7 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
+
     respond_to do |format|
       format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
       format.json { head :no_content }

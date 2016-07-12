@@ -7,6 +7,7 @@ class Movie < ActiveRecord::Base
   has_many :images, as: :imageable
   has_many :movie_casts
   has_many :actors, through: :movie_casts
+  has_many :reviews, dependent: :destroy
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
