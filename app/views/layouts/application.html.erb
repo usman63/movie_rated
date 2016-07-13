@@ -10,6 +10,16 @@
     <div class='black-background'>
       <%= render 'layouts/header'%>
       <%= render 'layouts/alert'%>
+
+        <% if @movie.errors.any? %>
+          <div id='error_explanation'>
+            <ul>
+              <% @movie.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
       <div class='container'>
         <%= yield %>
       </div>
