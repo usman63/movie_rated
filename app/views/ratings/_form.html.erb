@@ -1,0 +1,4 @@
+<%= form_for [@movie, @rating] do |f| %>
+  <h1 class="font-white">Rate it</h1>
+    <div id=<%= rating_div %> data-score = <%= @user_rating.try(:rating).to_i %> data-user_rating= <%= @user_rating.try(:rating).to_i %> data-rating_id = <%= @user_rating.try(:id).to_i %> data-movie_id = <%= @movie.id %> ></div>
+<% end %>

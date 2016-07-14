@@ -8,6 +8,7 @@ class Movie < ActiveRecord::Base
   has_many :movie_casts
   has_many :actors, through: :movie_casts
   has_many :reviews, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
@@ -25,4 +26,12 @@ class Movie < ActiveRecord::Base
     return self.all
   end
 
+  def user_rating(user)
+    self.ratings.where(user: user).last if user.present?
+  end
+
+  def cal_average_rating()
+    return 0 unless self.ratings.exists?
+    self.ratings.average(:rating).round(2)
+  end
 end

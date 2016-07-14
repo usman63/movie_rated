@@ -8,9 +8,13 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie_actors = @movie.actors.collect(&:name).join(', ')
+    @movie_actors = @movie.actors.pluck(:name).join(', ')
     @reviews = @movie.reviews.includes(:user).ordered
+
     @review = @movie.reviews.build
+    @rating = @movie.ratings.build
+    @user_rating = @movie.user_rating(current_user)
+    @avg_rating = @movie.cal_average_rating
   end
 
   def new
@@ -69,5 +73,4 @@ class MoviesController < ApplicationController
     def movie_params
       params.require(:movie).permit(:name, :released_date, :description, :duration, :embeded_url, {images_attributes: [:id, :image, :_destroy]}, :genre, {actor_ids: []}, :featured)
     end
-
 end

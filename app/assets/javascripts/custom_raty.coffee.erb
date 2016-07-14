@@ -1,0 +1,42 @@
+initalize_stars = ->
+  $('.star-rating').raty
+    path: '/assets'
+    scoreName: 'rating[rating]'
+    readOnly: 'true'
+    score : -> $(this).data('score')
+
+ratings = ->
+  $('#star-rating').raty
+    rating: 0
+    path: '/assets'
+    click: (rating, evt) ->
+      movie_id = $('#star-rating').data('movie_id')
+      $.ajax(
+        url: '/movies/' + movie_id + '/ratings'
+        type: 'POST'
+        data: {rating: {rating: rating}}
+        async: false
+        dataType: 'script')
+
+  $('#update-star-rating').raty
+    score: $('#update-star-rating').data('user_rating')
+    path: '/assets'
+    click: (rating, evt) ->
+      movie_id = $('#update-star-rating').data('movie_id')
+      rating_id = $('#update-star-rating').data('rating_id')
+      $.ajax(
+        url: '/movies/' + movie_id + '/ratings/'+ rating_id
+        data: {rating: {rating: rating}}
+        type: 'PATCH'
+        dataType: 'script').done (data) ->
+
+(($) ->
+  window.CustomRaty || (window.CustomRaty = {})
+
+  CustomRaty.init = ->
+    init_controls()
+
+  init_controls = ->
+    ratings()
+    initalize_stars()
+).call(this)

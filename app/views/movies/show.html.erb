@@ -1,7 +1,14 @@
 <%= render 'movie_trailer', movie: @movie %>
 <div class='row'>
   <div class='col col-sm-6 col-md-5 col-lg-4 col-lg-offset-2 padding-top'>
-    <%= image_tag show_image(@movie.images.first) %>
+    <div class='row'>
+      <%= image_tag show_image(@movie.images.first) %>
+    </div>
+    <% if user_signed_in? %>
+      <div class='row'>
+        <%= render 'ratings/form', user_rating: @user_rating %>
+      </div>
+    <% end %>
   </div>
   <div class='col col-sm-6 col-md-5 col-lg-4 font-white'>
     <div class='row'>
@@ -23,6 +30,12 @@
             <th>Genre</th>
             <td><%= @movie.genre %></td>
           </tr>
+          <% if @avg_rating %>
+            <tr>
+              <th>Rating </th>
+              <td><div class='star-rating' data-score=<%= @avg_rating %> ></div></td>
+            </tr>
+          <% end %>
         </table>
       </div>
     </div>
@@ -75,6 +88,5 @@
 </div>
 <%= link_to 'Back', movies_path %>
 <% content_for :js_init do %>
-  CustomerInitialCapture.init();
-  AttachmentSection.init();
+  CustomRaty.init();
 <% end %>

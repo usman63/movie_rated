@@ -1,0 +1,2 @@
+show_alert('alert-success','Rating Updated');
+$('.star-rating').raty({path: '/assets', readOnly: 'true', score: <%= @movie.cal_average_rating %>})

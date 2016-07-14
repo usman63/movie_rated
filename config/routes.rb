@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :movies do
     resources :reviews, except: [:show, :index]
+    resources :ratings
   end
   devise_for :users
   get '/home' => 'pages#home'
