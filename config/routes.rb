@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :reviews, except: [:show, :index]
     resources :ratings
   end
+
+  resources :reviews do
+    resources :report_reviews, only: [:create, :destroy]
+  end
   devise_for :users
   get '/home' => 'pages#home'
   root 'pages#home'

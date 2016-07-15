@@ -7,9 +7,19 @@
 <div class="row">
   <%= review.review %>
 </div>
-<% if review.user == current_user %>
-  <div class="row">
+<div class="row">
+  <% if review.user == current_user %>
     <%= link_to 'Edit', edit_movie_review_path(@movie, review), class: 'btn btn-primary' %>
     <%= link_to 'Destroy', [@movie, review], method: :delete,class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-  </div>
-<% end %>
+  <% else %>
+    <div class="col-md-2 form-group">
+      <% unless review.has_report?(current_user) %>
+        <%= form_for([review, review.report_reviews.build], remote: true) do |f| %>
+         <%= f.submit 'Report', class: "btn btn-sm btn-danger form-control report-btn" %>
+        <% end %>
+      <% else %>
+        <%= link_to "Already Reported", "#", class: "btn btn-sm btn-danger form-control report-btn" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
