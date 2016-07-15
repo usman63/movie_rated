@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie_actors = @movie.actors.pluck(:name).join(', ')
+    @movie_actors = @movie.cast
     @reviews = @movie.reviews.includes(:user).ordered
 
     @review = @movie.reviews.build

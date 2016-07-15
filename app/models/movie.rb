@@ -34,4 +34,12 @@ class Movie < ActiveRecord::Base
     return 0 unless self.ratings.exists?
     self.ratings.average(:rating).round(2)
   end
+
+  def cast
+    self.actors.pluck(:name).join(', ')
+  end
+
+  def last_poster
+    images.first
+  end
 end
