@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   mount Ckeditor::Engine => '/ckeditor'
+
   resources :movies do
     resources :reviews, except: [:show, :index]
     resources :ratings
@@ -9,6 +13,7 @@ Rails.application.routes.draw do
   resources :reviews do
     resources :report_reviews, only: [:create, :destroy]
   end
+
   devise_for :users
   get '/home' => 'pages#home'
   root 'pages#home'
