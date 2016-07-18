@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true, length: {minimum: 5, maximum: 60}
   validates :last_name, presence: true, length: {minimum: 5, maximum: 60}
+  validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
 
   accepts_nested_attributes_for :image
 

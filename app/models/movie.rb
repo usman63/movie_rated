@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  paginates_per 2
+  paginates_per 6
 
   MOVIE_LMIIT = 3
   GENRE = ["Horror", "Thriller", "Action", "Comedy"]

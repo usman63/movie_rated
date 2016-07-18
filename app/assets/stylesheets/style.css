@@ -115,6 +115,8 @@ body {
   background-image: url(/assets/bg1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  height: max-content;
+  min-height: 100%
 }
 .font-size {
   font-size: 30px;
@@ -154,4 +156,12 @@ body {
 }
 .my-alert {
   display: none;
+}
+html {
+  height: max-content;
+  min-height: 100%;
+}
+.full-height {
+  height: max-content;
+  min-height: 100%;
 }
