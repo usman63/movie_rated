@@ -1,0 +1,38 @@
+<div class='row padding-top'>
+  <div class='col col-sm-12 col-md-8 col-lg-10 padding-top center'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>User Profile</div>
+      <div class='panel-body'>
+        <div class='row'>
+          <div class='col col-sm-12 col-md-6 col-lg-4 col-lg-offset-1 padding-top'>
+            <div class='table-responsive padding-top'>
+              <table class='table'>
+                <tr>
+                  <th>First Name</th>
+                  <td><%= @user.first_name.titleize %></td>
+                </tr>
+                <tr>
+                  <th>Last Name</th>
+                  <td><%= @user.last_name.titleize %></td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td><%= @user.email %></td>
+                </tr>
+                <tr>
+                  <td colspan='2'><%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary btn-block' %></td>
+                  </tr>
+              </table>
+            </div>
+          </div>
+          <div class='col col-sm-12 col-md-6 col-lg-4 padding_top'>
+            <div>
+              <%= image_tag show_image(current_user.image) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
