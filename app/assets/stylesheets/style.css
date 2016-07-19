@@ -165,3 +165,6 @@ html {
   height: max-content;
   min-height: 100%;
 }
+.image-height {
+  height: 300px;
+}

@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  paginates_per 6
+  paginates_per 3
 
   MOVIE_LMIIT = 3
   GENRE = ["Horror", "Thriller", "Action", "Comedy"]
@@ -9,6 +9,7 @@ class Movie < ActiveRecord::Base
   has_many :actors, through: :movie_casts
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  has_many :favourites, dependent: :destroy
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
@@ -42,4 +43,5 @@ class Movie < ActiveRecord::Base
   def last_poster
     images.last
   end
+
 end

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :report_reviews, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_movies, through: :favorites, source: :favorited, source_type: 'Movie'
 
   validates :first_name, presence: true, length: {minimum: 5, maximum: 60}
   validates :last_name, presence: true, length: {minimum: 5, maximum: 60}

@@ -10,11 +10,11 @@ class MoviesController < ApplicationController
   def show
     @movie_actors = @movie.cast
     @reviews = @movie.reviews.includes(:user).ordered
-
     @review = @movie.reviews.build
     @rating = @movie.ratings.build
     @user_rating = @movie.user_rating(current_user)
     @avg_rating = @movie.cal_average_rating
+    @favorite = Favorite.favorite(current_user, @movie ) if user_signed_in?
   end
 
   def new

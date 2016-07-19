@@ -31,6 +31,22 @@
             </div>
           </div>
         </div>
+        <div class='row'>
+          <hr>
+          <h2>Movie Favorites</h2>
+          <div class='table'>
+            <% if @favourite_movies %>
+              <%= render 'movies/movie_list', movies: @favourite_movies %>
+              <div class='col col-sm-12 col-md-12 col-lg-6 col-lg-offset-4'>
+                <%= paginate @favourite_movies %>
+              </div>
+            <% else %>
+              <div class='center padding-top'>
+                <em>NO Favorite Movie yet</em>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

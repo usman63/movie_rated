@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714081112) do
+ActiveRecord::Schema.define(version: 20160718051228) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 20160714081112) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "favorited_id",   limit: 4
+    t.string   "favorited_type", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "favorites", ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.integer  "imageable_id",       limit: 4,   null: false
@@ -171,6 +182,7 @@ ActiveRecord::Schema.define(version: 20160714081112) do
   add_index "users", ["last_name"], name: "index_users_on_last_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "favorites", "users"
   add_foreign_key "movie_casts", "actors"
   add_foreign_key "movie_casts", "movies"
   add_foreign_key "ratings", "movies"

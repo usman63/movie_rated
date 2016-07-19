@@ -16,11 +16,11 @@
         <table class='font-size'>
           <tr>
             <th>Title</th>
-            <td><%= @movie.name %></td>
+            <td><%= @movie.name.titleize %></td>
           </tr>
           <tr>
             <th>Released Date</th>
-            <td><%= @movie.released_date %></td>
+            <td><%= @movie.released_date.to_formatted_s(:rfc822) %></td>
           </tr>
           <tr>
             <th>Duration</th>
@@ -42,9 +42,15 @@
     <div class='row '>
       <%= link_to 'Watch Trailer', '#', 'data-toggle' => 'modal', 'data-target' => '#movie_trailer', class: 'btn btn-success btn-block' %>
     </div>
-    <div class='row padding-top'>
-      <%= link_to 'Edit Details', edit_movie_path(@movie), class: 'btn btn-primary btn-block' %>
-    </div>
+    <% if user_signed_in? %>
+      <div class='row padding-top'>
+        <% if @favorite.blank? %>
+          <%= link_to 'Add to favorites', movie_favorite_movies_path(movie_id: @movie), method: :post, remote: true, class: 'btn btn-primary btn-block' %>
+        <% else %>
+          <%= link_to 'Remove from favorites', movie_favorite_movie_path(@movie, @favorite), method: :delete, remote: true, class: 'btn btn-danger btn-block' %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
 <hr>
