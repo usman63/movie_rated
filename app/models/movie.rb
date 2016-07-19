@@ -1,4 +1,6 @@
 class Movie < ActiveRecord::Base
+  include ThinkingSphinx::Scopes
+
   paginates_per 3
 
   MOVIE_LMIIT = 3
@@ -15,6 +17,10 @@ class Movie < ActiveRecord::Base
 
   scope :featured, -> { where(featured: true) }
   scope :latest, -> { order(released_date: :desc) }
+
+  sphinx_scope(:latest_first) {
+    {order: 'released_date DESC'}
+  }
 
   validates :name,          presence: true, length: { maximum: 60 }
   validates :released_date, presence: true

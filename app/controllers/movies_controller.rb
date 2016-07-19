@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
 
   def index
+    return  @movies = Movie.latest_first.search(params[:search]) if params[:search]
     @movies = Movie.get_movies(params).page(params[:page])
   end
 

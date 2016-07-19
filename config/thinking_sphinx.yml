@@ -1,0 +1,8 @@
+default: &default
+ mysql41: 9307
+
+development:
+ <<: *default
+
+production:
+ <<: *default
