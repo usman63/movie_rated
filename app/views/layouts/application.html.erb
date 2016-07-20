@@ -8,15 +8,16 @@
   </head>
   <body>
     <div class='black-background'>
+    <div class="full-height">
       <%= render 'layouts/header'%>
       <%= render 'layouts/alert'%>
 
-      <div class='container full-height'>
+      <div class='container'>
         <%= yield %>
       </div>
-
+      </div>
       <%= render 'layouts/footer'%>
-
+      <div class="clearfix"></div>
     </div>
     <script type="text/javascript">
       $(function() {
