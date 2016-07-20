@@ -1,9 +1,9 @@
 ActiveAdmin.register Movie do
 
-  permit_params :name, :description, :embeded_url, {actor_ids: []}, :featured, images_attributes: [:id, :image, :_destroy]
+  permit_params :name, :description, :embeded_url, {actor_ids: []}, :is_featured, :approved, images_attributes: [:id, :image, :_destroy]
 
   filter :name
-  filter :featured
+  filter :is_featured
   filter :actors
   filter :released_date
 
@@ -20,6 +20,7 @@ ActiveAdmin.register Movie do
         row :description
         row :embeded_url
         row :featured
+        row :approved
         row :actors do |movie|
           movie.cast
         end
@@ -30,7 +31,8 @@ ActiveAdmin.register Movie do
     column :name
     column :description
     column :embeded_url
-    column :featured
+    column :is_featured
+    column :approved
     column :actors do |movie|
       movie.cast
     end
@@ -45,7 +47,8 @@ ActiveAdmin.register Movie do
       f.input :name
       f.input :description
       f.input :embeded_url
-      f.input :featured
+      f.input :is_featured
+      f.input :approved
       f.input :actors
       f.has_many :images, heading: 'Posters', new_record: 'Add Poster' do |attachment|
         attachment.input :image, hint: attachment.template.image_tag(attachment_image attachment.object), allow_destroy: true
