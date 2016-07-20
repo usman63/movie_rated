@@ -50,12 +50,10 @@
   width: 100%;
   z-index: 1;
 }
-.site-footer, .page-wrap:after {
-  height: 142px;
-}
 .site-footer {
   background: black;
   opacity: 0.9;
+  padding: 25px;
 }
 .movie-item {
   background-color: black;
@@ -99,8 +97,6 @@
   height: 115px;
 }
 .black-background {
-  background-color: rgba(63, 37, 30, 0.85);
-  background: rgba(63, 60, 60, 0.85);
   width: 100%;
   height: 100%;
 }
@@ -112,11 +108,11 @@
   margin: auto;
 }
 body {
-  background-image: url(/assets/bg1.jpg);
-  background-repeat: no-repeat;
+  background: url(/assets/bg1.jpg) center center;
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  height: max-content;
-  min-height: 100%
 }
 .font-size {
   font-size: 30px;
@@ -157,14 +153,16 @@ body {
 .my-alert {
   display: none;
 }
-html {
-  height: max-content;
-  min-height: 100%;
+html,
+body {
+  height: 100%;
 }
 .full-height {
-  height: max-content;
   min-height: 100%;
+  background-color: rgba(63, 37, 30, 0.85);
+  background: rgba(63, 60, 60, 0.85);
 }
 .image-height {
   height: 300px;
 }
+
