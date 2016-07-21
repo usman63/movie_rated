@@ -83,13 +83,20 @@
 <div class='row font-white'>
   <%= render partial: 'reviews/form', locals: {remote_form: true} %>
 </div>
-<div class='row font-white'>
-  <div id='reviews'>
-    <% if @reviews.blank? %>
-      <h3>No review for this movie yet.</h3>
-    <% else %>
-      <%= render partial: 'review', collection: @reviews %>
-    <% end %>
+<div class='row'>
+  <div class="container">
+    <div class="row font-white">
+    <h2>Reviews</h2>
+    </div>
+    <div id='reviews'>
+      <% if @reviews.blank? %>
+        <h3>No review for this movie yet.</h3>
+      <% else %>
+        <div class="qa-message-list" id="wallmessages">
+          <%= render partial: 'review', collection: @reviews %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 <%= link_to 'Back', movies_path %>

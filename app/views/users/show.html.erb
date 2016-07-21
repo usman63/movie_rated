@@ -1,54 +1,32 @@
-<div class='row padding-top'>
-  <div class='col col-sm-12 col-md-8 col-lg-10 padding-top center'>
-    <div class='panel panel-default'>
-      <div class='panel-heading'>User Profile</div>
-      <div class='panel-body'>
-        <div class='row'>
-          <div class='col col-sm-12 col-md-6 col-lg-4 col-lg-offset-1 padding-top'>
-            <div class='table-responsive padding-top'>
-              <table class='table'>
-                <tr>
-                  <th>First Name</th>
-                  <td><%= @user.first_name.titleize %></td>
-                </tr>
-                <tr>
-                  <th>Last Name</th>
-                  <td><%= @user.last_name.titleize %></td>
-                </tr>
-                <tr>
-                  <th>Email</th>
-                  <td><%= @user.email %></td>
-                </tr>
-                <tr>
-                  <td colspan='2'><%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary btn-block' %></td>
-                  </tr>
-              </table>
-            </div>
-          </div>
-          <div class='col col-sm-12 col-md-6 col-lg-4 padding_top'>
-            <div>
-              <%= image_tag show_image(current_user.image) %>
-            </div>
-          </div>
-        </div>
-        <div class='row'>
-          <hr>
-          <h2>Movie Favorites</h2>
-          <div class='table'>
-            <% if @favourite_movies %>
-              <%= render 'movies/movie_list', movies: @favourite_movies %>
-              <div class='col col-sm-12 col-md-12 col-lg-6 col-lg-offset-4'>
-                <%= paginate @favourite_movies %>
-              </div>
-            <% else %>
-              <div class='center padding-top'>
-                <em>NO Favorite Movie yet</em>
-              </div>
-            <% end %>
-          </div>
-        </div>
+<div class="container well">
+
+  <div class="row">
+    <div class="fb-profile">
+      <%= image_tag 'bg2', class: 'fb-image-lg', align: "left" %>
+      <%= image_tag show_image(current_user.image), class: 'fb-image-profile thumbnail', align: "left" %>
+      <div class="fb-profile-text">
+        <h1><%= @user.first_name.titleize %></h1>
+        <p><%= @user.email %></p>
+        <p><%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary radius-none' %></p>
       </div>
     </div>
   </div>
-</div>
 
+  <div class='row'>
+    <hr>
+    <h2>Movie Favorites</h2>
+    <div class='table'>
+      <% if @favourite_movies %>
+        <%= render 'movies/movie_list', movies: @favourite_movies %>
+        <div class='col col-sm-6 col-md-6 col-lg-6 col-lg-offset-4'>
+          <%= paginate @favourite_movies %>
+        </div>
+      <% else %>
+        <div class='center padding-top'>
+          <em>NO Favorite Movie yet</em>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

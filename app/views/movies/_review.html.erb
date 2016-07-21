@@ -1,25 +1,47 @@
-<hr>
-<div class="row">
-  <div class="col">
-    <strong><%= review.user.first_name %></strong> -<em><%= review.user.email %></em>
-  </div>
-</div>
-<div class="row">
-  <%= review.review %>
-</div>
-<div class="row">
-  <% if review.user == current_user %>
-    <%= link_to 'Edit', edit_movie_review_path(@movie, review), class: 'btn btn-primary' %>
-    <%= link_to 'Destroy', [@movie, review], method: :delete,class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-  <% else %>
-    <div class="col-md-2 form-group">
-      <% unless review.has_report?(current_user) %>
-        <%= form_for([review, review.report_reviews.build], remote: true) do |f| %>
-         <%= f.submit 'Report', class: "btn btn-sm btn-danger form-control report-btn" %>
-        <% end %>
-      <% else %>
-        <%= link_to "Already Reported", "#", class: "btn btn-sm btn-danger form-control report-btn" %>
+<div class='message-item'>
+  <div class='message-inner'>
+    <div class='message-head clearfix'>
+      <div class='avatar pull-left'><%= image_tag show_image( review.user.image), class: 'review-img' %></div>
+      <div class='user-detail'>
+        <h5 class='handle'><%= review.user.first_name %></h5>
+        <div class='post-meta'>
+          <div class='asker-meta'>
+            <span class='qa-message-what'></span>
+            <span class='qa-message-when'>
+              <span class='qa-message-when-data'>
+                <em><%= review.created_at.strftime('%d-%m-%Y %A') %></em>
+              </span>
+            </span>
+            <span class='qa-message-who'>
+              <span class='qa-message-who-pad'>by </span>
+              <span class='qa-message-who-data'><%= review.user.first_name %></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='qa-message-content font-black'>
+      <%= review.review %>
+      <% if user_signed_in? %>
+        <div class='pull-right'>
+          <% if review.user == current_user %>
+            <%= link_to 'Edit', edit_movie_review_path(@movie, review), class: 'btn btn-primary' %>
+            <%= link_to 'Destroy', [@movie, review], method: :delete, class: 'btn btn-danger radius-none', data: { confirm: 'Are you sure?' } %>
+          <% else %>
+            <div class='col-md-2 form-group'>
+              <% unless review.has_report?(current_user) %>
+                <%= form_for([review, review.report_reviews.build], remote: true) do |f| %>
+                 <%= f.submit 'Report', class: 'btn btn-xsm btn-danger report-btn radius-none' %>
+                <% end %>
+              <% else %>
+                <%= link_to 'Already Reported', '#', class: 'btn btn-sm btn-danger report-btn radius-none' %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
-  <% end %>
+
+  </div>
 </div>
