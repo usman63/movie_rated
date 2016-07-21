@@ -3,6 +3,9 @@ class Movie < ActiveRecord::Base
 
   paginates_per 3
 
+  DEFAULT_SEARCH_FILTER = { approved: true }
+  DEFAULT_SEARCH_ORDER = 'released_date DESC'
+
   MOVIE_LMIIT = 3
   GENRE = ["Horror", "Thriller", "Action", "Comedy"]
 
@@ -63,6 +66,32 @@ class Movie < ActiveRecord::Base
     end
 
     self.search params[:search], default_options
+  end
+
+
+
+  def movie_hash
+    if self.present?
+      movie = Hash.new
+      movie[:id] = self.id
+      movie[:title] = self.title
+      movie[:description] = self.description
+      movie[:actors] = self.actors.select(:id, :name, :biography, :gender, :created_at, :updated_at)
+      movie[:reviews] = self.reviews.select(:id, :user_id, :comment, :created_at, :updated_at, :report_count)
+      movie[:ratings] = self.ratings.select(:id, :score, :created_at, :updated_at, :user_id)
+      movie
+    end
+  end
+
+  def self.search_movie(params)
+    conditions = {
+      name: params[:search],
+      genre: params[:genre],
+      actor: params[:actor],
+      released_date: params[:released_date]
+      }
+
+    Movie.search(conditions: conditions, with: DEFAULT_SEARCH_FILTER, order: DEFAULT_SEARCH_ORDER)
   end
 
 end

@@ -19,6 +19,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :movies, only: [:index, :show]
+    end
+  end
   get '/home' => 'pages#home'
   root 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
