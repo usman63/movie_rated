@@ -1,7 +1,53 @@
-<%= form_tag movies_path, method: :get, class: 'form-inline' do %>
-  <div class='form-group'>
-   <%= text_field_tag :search, params[:search], class:'form-control', placeholder: 'Search Movies Here' %>
-  </div>
-  <%= submit_tag 'Search', class:'btn btn-default'%>
-<% end %>
+<div class='modal fade bs-example-modal-lg' id='search-modal' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel'>
+  <div class='modal-dialog modal-lg'>
+    <div class='modal-content radius-none'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <h4 class='modal-title align-center '>Search Movies</h4>
+      </div>
 
+      <div class='container-fluid'>
+        <%= form_tag movies_path, method: :get, class: 'form-horizontal' do %>
+          <div class='row'>
+            <div class='input-group input-group-lg'>
+              <span class='input-group-addon  radius-none' id='basic-addon3'>Enter Key Words</span>
+              <%= text_field_tag :search, params[:search], class:'form-control radius-none input-group-lg radius-none', placeholder: 'Search Movies Here', 'aria-describedby'=>'basic-addon3' %>
+            </div>
+          </div>
+
+          <div class='well radius-none'>
+            <div class='row padding-top'>
+              <div class='col col-lg-6 col-md-6 col-sm-6'>
+                <label>Genre</label>
+                <%= select_tag :genre, options_for_select(collection_for_movie_genre), include_blank: 'Please Select Genre', class: 'form-control radius-none' %>
+              </div>
+
+              <div class='col col-lg-6 col-md-6 col-sm-6'>
+                <label>Actors</label>
+                <%= text_field_tag :actor, params[:actor], class:'form-control radius-none', placeholder: 'Search Actor Here' %>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='col col-lg-6 col-md-6 col-sm-6'>
+                <label>Start Date</label>
+                <%= date_field_tag :start_date, params[:start_date], class:'form-control radius-none', placeholder: 'Search By Start Date' %>
+              </div>
+
+              <div class='col col-lg-6 col-md-6 col-sm-6'>
+                <label>End Date</label>
+                <%= date_field_tag :end_date, params[:end_date], class:'form-control radius-none', placeholder: 'Search By End' %>
+              </div>
+            </div>
+          </div>
+
+          <div class='row '>
+            <%= button_tag(type: 'submit', class: 'btn btn-primary btn-block paddinng-top radius-none') do %>
+              <span class='glyphicon glyphicon-search' aria-hidden='true'>Search</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

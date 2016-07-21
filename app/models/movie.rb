@@ -15,23 +15,18 @@ class Movie < ActiveRecord::Base
 
   accepts_nested_attributes_for :images, allow_destroy: true
 
-  scope :featured, -> { where(featured: true) }
-  scope :latest, -> { order(released_date: :desc) }
+  sphinx_scope(:latest) {{order: 'released_date DESC'}}
+  sphinx_scope(:by_genre) {|genre|{conditions: {genre: genre}}}
 
-  sphinx_scope(:latest_first) {
-    {order: 'released_date DESC'}
-  }
+  sphinx_scope(:by_featured) {{with: {is_featured: true}}}
+  sphinx_scope(:approved) {{with: {approved: true}}}
+  sphinx_scope(:by_actors) {|actors| {conditions: {actor: actors}}}
+  sphinx_scope(:by_date) {|released_date| {with: {released_date: released_date}}}
 
   validates :name,          presence: true, length: { maximum: 60 }
   validates :released_date, presence: true
   validates :duration,                      length: { maximum: 20 }
   validates :genre,                         length: { maximum: 30 }
-
-  def self.get_movies (params)
-    return self.featured if params[:featured].present?
-    return self.latest if params[:latest].present?
-    return self.all
-  end
 
   def user_rating(user)
     self.ratings.where(user: user).last if user.present?
@@ -48,6 +43,26 @@ class Movie < ActiveRecord::Base
 
   def last_poster
     images.last
+  end
+
+  def self.filter_search(params)
+    default_options = {
+      conditions: {},
+      with: {},
+      order: 'released_date  DESC',
+      page: params[:page],
+      per_page: 4
+    }
+
+    default_options[:conditions][:genre] = params[:genre] if params[:genre].present?
+    default_options[:conditions][:actor] = params[:actor] if params[:actor].present?
+    default_options[:with][:approved] = true
+
+    if params[:start_date].present? && params[:end_date].present?
+      default_options[:with][:released_date] = (Date.parse(params[:start_date])..Date.parse(params[:end_date]))
+    end
+
+    self.search params[:search], default_options
   end
 
 end

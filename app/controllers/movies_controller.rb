@@ -2,10 +2,10 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :get_all_actors
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :validate_date_range, only: [:index]
 
   def index
-    return  @movies = Movie.latest_first.search(params[:search]) if params[:search]
-    @movies = Movie.get_movies(params).page(params[:page])
+    @movies = Movie.filter_search(params)
   end
 
   def show
@@ -69,6 +69,19 @@ class MoviesController < ApplicationController
 
     def set_movie
       @movie = Movie.find(params[:id])
+    end
+
+    def validate_date_range
+      return if params[:start_date].blank? && params[:end_date].blank?
+      message =
+        if params[:start_date].blank? && params[:end_date].present?
+          'Start date should not be blank'
+        elsif params[:start_date].present? && params[:end_date].blank?
+          'End date should not be blank'
+        elsif params[:start_date].to_date > params[:end_date].to_date
+          'End date should be after start date'
+        end
+      redirect_to movies_path, flash: { error: message } if message.present?
     end
 
     def movie_params

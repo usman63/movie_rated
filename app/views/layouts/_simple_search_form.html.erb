@@ -1,0 +1,10 @@
+<div class='margin-top-9'>
+  <%= form_tag movies_path, method: :get, class: 'form-inline' do %>
+    <div class='form-group'>
+      <%= text_field_tag :search, params[:search], class:'form-control', placeholder: 'Search Movies Here' %>
+    </div>
+    <%= button_tag(type: 'submit', class: 'btn btn-primary ') do %>
+      <span class='glyphicon glyphicon-search' aria-hidden='true'></span>
+    <% end %>
+  <% end %>
+</div>

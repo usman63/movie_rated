@@ -39,14 +39,17 @@
   </nav>
 </div>
 <nav class='navbar navbar-inverse' data-spy='affix' data-offset-top='140'>
-  <div class='container'>
+  <div class='container-fluid'>
     <div id='navbar2' class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
         <li><%= link_to 'Home', home_path %></li>
         <li><%= link_to 'Movies', movies_path %></li>
-        <li><%= link_to 'Contact us', '#' %></li>
-        <li><%= render 'layouts/search_form' %></li>
+        <li>
+          <%= link_to 'Advance Search', '#', 'data-toggle' => 'modal', 'data-target' => '#search-modal' %>
+        </li>
+        <li><%= render 'layouts/simple_search_form'%></li>
       </ul>
     </div>
   </div>
 </nav>
+<%= render 'layouts/search_form' %>
