@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
-# Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.18'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -36,6 +34,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '~> 0.3.18'
 end
 
 group :development do
@@ -45,6 +45,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
 # additional gems
 gem 'devise'
 gem "paperclip"
@@ -55,3 +61,4 @@ gem 'kaminari'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'country_select'
 gem 'thinking-sphinx'
+ruby "2.2.2"
